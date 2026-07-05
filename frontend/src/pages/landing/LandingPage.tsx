@@ -7,6 +7,7 @@ import { ROUTES } from '@/lib/constants';
  * Intentionally presentational only.
  */
 export function LandingPage() {
+  const partnerLogos = ['Pay', 'GPay', 'PhonePe', 'Paytm'];
   return (
     <div className="min-h-screen bg-[#000000] text-white">
       <div className="mx-auto max-w-[1280px] px-6 md:px-10 py-10 md:py-14 space-y-16">
@@ -40,7 +41,7 @@ export function LandingPage() {
           <div className="space-y-6">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#1E1E1E] bg-[#0D0D0D] px-4 py-1 text-xs uppercase tracking-[0.2em] text-[#A0A0A0]">
               <span className="h-2 w-2 rounded-full bg-[#BFFF00]" />
-              FinTrack
+              Version 1.0
             </span>
             <h1 className="text-4xl md:text-6xl font-bold leading-tight text-white">
               Stop Tracking.
@@ -48,8 +49,8 @@ export function LandingPage() {
               Start Accumulating.
             </h1>
             <p className="max-w-xl text-[#A0A0A0] text-base md:text-lg">
-              Smart, dark-mode money intelligence for modern businesses. Track revenue, optimize spending, and
-              visualize growth with clarity.
+              Most apps tell you where your money went. FinTrack tells you what to keep, fix, and grow with real-time
+              visibility and automated controls.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -66,6 +67,14 @@ export function LandingPage() {
                 <MaterialIcon name="play_circle" />
                 Watch Demo
               </button>
+            </div>
+            <div className="flex items-center gap-3 text-xs text-[#A0A0A0]">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4].map((v) => (
+                  <div key={v} className="h-7 w-7 rounded-full border border-[#1E1E1E] bg-[#111111]" />
+                ))}
+              </div>
+              <span>Trusted by 5000+ users</span>
             </div>
           </div>
 
@@ -84,19 +93,38 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section className="space-y-5">
-          <h2 className="text-3xl font-bold text-white">Built to Help You Spend Smarter</h2>
+        <section className="grid grid-cols-2 gap-8 border-y border-[#1E1E1E] py-5 md:grid-cols-4">
+          {partnerLogos.map((logo) => (
+            <div key={logo} className="text-center text-sm md:text-xl font-semibold text-[#A0A0A0]">
+              {logo}
+            </div>
+          ))}
+        </section>
+
+        <section className="space-y-6">
+          <div className="text-center space-y-2">
+            <span className="inline-flex items-center rounded-full border border-[#1E1E1E] bg-[#0D0D0D] px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-[#A0A0A0]">
+              Features
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Built to help you spend smarter, not less.</h2>
+            <p className="text-[#A0A0A0] max-w-2xl mx-auto text-sm md:text-base">
+              Visualize spending, automate budgeting, and improve your decision making with clear, actionable
+              dashboards.
+            </p>
+          </div>
+
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-2xl border border-[#1E1E1E] bg-[#0D0D0D] p-6 space-y-4">
               <p className="text-xs uppercase tracking-[0.18em] text-[#A0A0A0]">Spending Clarity</p>
               <div className="space-y-3">
                 {[
-                  ['Utilities', '72%'],
-                  ['Transport', '55%'],
-                  ['Inventory', '90%'],
+                  ['Dining & Food', '82%'],
+                  ['Transport', '56%'],
+                  ['Entertainment', '43%'],
+                  ['Others', '31%'],
                 ].map(([label, value]) => (
                   <div key={label}>
-                    <div className="mb-1 flex justify-between text-sm text-[#A0A0A0]">
+                    <div className="mb-1 flex justify-between text-xs text-[#A0A0A0]">
                       <span>{label}</span>
                       <span>{value}</span>
                     </div>
@@ -107,11 +135,21 @@ export function LandingPage() {
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl border border-[#1E1E1E] bg-[#0D0D0D] p-6">
-              <p className="text-xs uppercase tracking-[0.18em] text-[#A0A0A0]">Smart Budgets</p>
-              <p className="mt-3 text-3xl font-bold text-white">RWF 8,000</p>
-              <div className="mt-6 h-28 rounded-xl bg-[#111111] p-4">
-                <div className="h-full w-full rounded-lg bg-gradient-to-t from-[#BFFF00]/35 to-transparent" />
+
+            <div className="grid gap-4">
+              <div className="rounded-2xl border border-[#1E1E1E] bg-[#0D0D0D] p-5">
+                <p className="text-xs uppercase tracking-[0.18em] text-[#A0A0A0]">Smart Budgets</p>
+                <p className="mt-2 text-sm text-[#A0A0A0]">Stay on target with auto budget caps.</p>
+                <div className="mt-4 flex items-center justify-between">
+                  <p className="text-2xl font-bold text-white">Rs. 8,300</p>
+                  <div className="h-14 w-14 rounded-full border-4 border-[#BFFF00] border-r-transparent" />
+                </div>
+              </div>
+              <div className="rounded-2xl border border-[#1E1E1E] bg-[#0D0D0D] p-5">
+                <p className="text-xs uppercase tracking-[0.18em] text-[#A0A0A0]">Automatic Savings</p>
+                <div className="mt-6 h-20 rounded-xl bg-[#111111] p-2">
+                  <div className="h-full w-full rounded-lg bg-gradient-to-t from-[#BFFF00]/50 to-transparent" />
+                </div>
               </div>
             </div>
           </div>
@@ -136,6 +174,43 @@ export function LandingPage() {
                 <p className="mt-2 text-sm text-[#A0A0A0]">{desc}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-[#1E1E1E] bg-[#0D0D0D] p-6 space-y-4">
+            <span className="inline-flex items-center rounded-full border border-[#1E1E1E] bg-[#111111] px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-[#A0A0A0]">
+              Benefits
+            </span>
+            <h3 className="text-3xl font-bold text-white">Tools built for wealth.</h3>
+            <div className="space-y-3 text-sm">
+              {[
+                ['Smart Budgets', 'Set category budgets and alerts.'],
+                ['Impulse Control', 'See risk spots before spending.'],
+                ['Goal Buckets', 'Track savings goals clearly.'],
+              ].map(([title, desc]) => (
+                <div key={title} className="rounded-xl border border-[#1E1E1E] bg-[#111111] p-4">
+                  <p className="font-semibold text-white">{title}</p>
+                  <p className="text-[#A0A0A0] mt-1">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-2xl border border-[#1E1E1E] bg-[#0D0D0D] p-6">
+            <p className="text-3xl font-bold text-white">Rs. 8,000</p>
+            <div className="mt-4 h-3 rounded-full bg-[#111111]">
+              <div className="h-3 w-2/3 rounded-full bg-[#BFFF00]" />
+            </div>
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <div className="rounded-xl border border-[#1E1E1E] bg-[#111111] p-3">
+                <p className="text-xs uppercase text-[#A0A0A0]">Monthly Save</p>
+                <p className="text-xl font-bold text-white mt-1">Rs. 400</p>
+              </div>
+              <div className="rounded-xl border border-[#1E1E1E] bg-[#111111] p-3">
+                <p className="text-xs uppercase text-[#A0A0A0]">Progress</p>
+                <p className="text-xl font-bold text-[#BFFF00] mt-1">Rs. 1200</p>
+              </div>
+            </div>
           </div>
         </section>
       </div>

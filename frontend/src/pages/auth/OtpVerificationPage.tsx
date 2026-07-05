@@ -29,7 +29,7 @@ export function OtpVerificationPage() {
 
   return (
     <AuthLayout title={t('auth.otpTitle')} subtitle={t('auth.otpSubtitle')}>
-      <p className="text-sm text-on-primary-container text-center mb-unit-md">{t('auth.otpSent')}</p>
+      <p className="text-sm text-[#A0A0A0] text-center mb-unit-md">{t('auth.otpSent')}</p>
       <form onSubmit={handleSubmit((d) => verifyOtp.mutate(d))} className="space-y-unit-md">
         <AuthFieldInput
           id="email"
@@ -51,7 +51,7 @@ export function OtpVerificationPage() {
             className="text-center text-2xl tracking-[0.5em] font-mono pl-3"
             {...register('code')}
           />
-          {errors.code && <p className="text-xs text-error">{errors.code.message}</p>}
+          {errors.code && <p className="text-xs text-[#BFFF00]">{errors.code.message}</p>}
         </div>
         <Button type="submit" variant="gold" className="w-full" disabled={isSubmitting || verifyOtp.isPending}>
           {t('auth.verifyOtp')}
@@ -60,14 +60,14 @@ export function OtpVerificationPage() {
       <Button
         type="button"
         variant="ghost"
-        className="w-full text-on-primary-container hover:text-secondary-fixed hover:bg-white/5"
+        className="w-full"
         onClick={() => resendOtp.mutate(getValues('email'))}
         disabled={resendOtp.isPending}
       >
         {t('auth.resendOtp')}
       </Button>
-      <p className="mt-unit-md text-center font-body-md text-on-primary-container">
-        <Link to={ROUTES.LOGIN} className="text-secondary-fixed-dim font-bold hover:underline">
+      <p className="mt-unit-md text-center font-body-md text-[#A0A0A0]">
+        <Link to={ROUTES.LOGIN} className="text-[#CCFF00] font-bold hover:underline">
           {t('auth.login')}
         </Link>
       </p>

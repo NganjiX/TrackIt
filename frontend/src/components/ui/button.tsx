@@ -11,12 +11,12 @@ const buttonVariants = cva(
         destructive: 'bg-error text-on-error hover:bg-error/90',
         outline:
           'border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-on-primary',
-        secondary: 'bg-white border border-outline-variant text-primary hover:bg-surface-container-low',
-        ghost: 'hover:bg-surface-container-low text-primary',
+        secondary: 'bg-[#111111] border border-[#1E1E1E] text-white hover:border-[#BFFF00]/50',
+        ghost: 'hover:bg-[#111111] text-[#A0A0A0] hover:text-[#CCFF00]',
         link: 'text-secondary underline-offset-4 hover:underline font-semibold',
-        gold: 'bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed shadow-lg shadow-secondary/20',
-        pill: 'bg-primary text-on-primary rounded-full shadow-md hover:bg-primary-container',
-        'pill-outline': 'border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-on-primary',
+        gold: 'bg-[#BFFF00] text-black hover:bg-[#CCFF00] shadow-[0_12px_28px_rgba(0,0,0,0.4)]',
+        pill: 'bg-[#BFFF00] text-black rounded-full shadow-[0_12px_28px_rgba(0,0,0,0.4)] hover:bg-[#CCFF00]',
+        'pill-outline': 'border border-[#1E1E1E] bg-[#0D0D0D] text-white rounded-full hover:border-[#BFFF00]/60',
       },
       size: {
         default: 'h-11 px-4 py-2',

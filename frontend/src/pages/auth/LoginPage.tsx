@@ -64,7 +64,7 @@ export function LoginPage() {
           labelExtra={
             <Link
               to={ROUTES.FORGOT_PASSWORD}
-              className="font-label-sm text-on-primary-container hover:text-secondary-fixed transition-colors"
+              className="font-label-sm text-[#A0A0A0] hover:text-[#CCFF00] transition-colors"
             >
               {t('auth.forgotPassword')}
             </Link>
@@ -82,7 +82,7 @@ export function LoginPage() {
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-unit-sm top-1/2 -translate-y-1/2 text-on-primary-container hover:text-on-primary transition-colors"
+            className="absolute right-unit-sm top-1/2 -translate-y-1/2 text-[#A0A0A0] hover:text-[#CCFF00] transition-colors"
           >
             <MaterialIcon name={showPassword ? 'visibility_off' : 'visibility'} className="text-xl" />
           </button>
@@ -96,17 +96,17 @@ export function LoginPage() {
 
         <div className="relative py-unit-sm">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-white/10" />
+            <div className="w-full border-t border-[#1E1E1E]" />
           </div>
           <div className="relative flex justify-center">
-            <span className="px-unit-md text-white/40 font-label-sm uppercase">{t('auth.orContinue')}</span>
+            <span className="px-unit-md text-[#A0A0A0] bg-[#0D0D0D] font-label-sm uppercase">{t('auth.orContinue')}</span>
           </div>
         </div>
 
         <Button
           type="button"
           variant="secondary"
-          className="w-full bg-white/5 border-white/10 text-on-primary hover:bg-white/10"
+          className="w-full"
           onClick={() => {
             window.location.href = authApi.googleAuthUrl();
           }}
@@ -121,9 +121,9 @@ export function LoginPage() {
         </Button>
       </form>
 
-      <p className="mt-unit-lg text-center font-body-md text-on-primary-container">
+      <p className="mt-unit-lg text-center font-body-md text-[#A0A0A0]">
         {t('auth.noAccount')}{' '}
-        <Link to={ROUTES.REGISTER} className="text-secondary-fixed-dim font-bold hover:underline ml-unit-xs">
+        <Link to={ROUTES.REGISTER} className="text-[#CCFF00] font-bold hover:underline ml-unit-xs">
           {t('auth.register')}
         </Link>
       </p>

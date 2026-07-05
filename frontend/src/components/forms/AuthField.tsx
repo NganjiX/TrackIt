@@ -27,11 +27,11 @@ export function AuthField({ id, label, icon, error, children, labelExtra }: Auth
       <div className="relative">
         <MaterialIcon
           name={icon}
-          className="absolute left-unit-sm top-1/2 -translate-y-1/2 text-on-primary-container text-xl pointer-events-none z-10"
+          className="absolute left-unit-sm top-1/2 -translate-y-1/2 text-[#A0A0A0] text-xl pointer-events-none z-10"
         />
         {children ?? <Input id={id} variant="auth" className="pl-10" />}
       </div>
-      {error && <p className="text-xs text-error">{error.message}</p>}
+      {error && <p className="text-xs text-[#BFFF00]">{error.message}</p>}
     </div>
   );
 }

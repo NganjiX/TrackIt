@@ -74,17 +74,17 @@ export function RegisterPage() {
 
       <div className="relative py-unit-sm">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-white/10" />
+          <div className="w-full border-t border-[#1E1E1E]" />
         </div>
         <div className="relative flex justify-center">
-          <span className="px-unit-md text-white/40 font-label-sm uppercase">{t('auth.orContinue')}</span>
+          <span className="px-unit-md text-[#A0A0A0] bg-[#0D0D0D] font-label-sm uppercase">{t('auth.orContinue')}</span>
         </div>
       </div>
 
       <Button
         type="button"
         variant="secondary"
-        className="w-full bg-white/5 border-white/10 text-on-primary hover:bg-white/10"
+        className="w-full"
         onClick={() => {
           window.location.href = authApi.googleAuthUrl();
         }}
@@ -92,9 +92,9 @@ export function RegisterPage() {
         {t('auth.googleLogin')}
       </Button>
 
-      <p className="mt-unit-lg text-center font-body-md text-on-primary-container">
+      <p className="mt-unit-lg text-center font-body-md text-[#A0A0A0]">
         {t('auth.hasAccount')}{' '}
-        <Link to={ROUTES.LOGIN} className="text-secondary-fixed-dim font-bold hover:underline">
+        <Link to={ROUTES.LOGIN} className="text-[#CCFF00] font-bold hover:underline">
           {t('auth.login')}
         </Link>
       </p>

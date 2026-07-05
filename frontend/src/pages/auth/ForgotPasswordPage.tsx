@@ -34,8 +34,8 @@ export function ForgotPasswordPage() {
           {t('common.submit')}
         </Button>
       </form>
-      <p className="mt-unit-md text-center font-body-md text-on-primary-container">
-        <Link to={ROUTES.LOGIN} className="text-secondary-fixed-dim font-bold hover:underline">
+      <p className="mt-unit-md text-center font-body-md text-[#A0A0A0]">
+        <Link to={ROUTES.LOGIN} className="text-[#CCFF00] font-bold hover:underline">
           {t('common.back')}
         </Link>
       </p>

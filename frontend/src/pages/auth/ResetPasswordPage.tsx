@@ -24,8 +24,8 @@ export function ResetPasswordPage() {
   if (!token) {
     return (
       <AuthLayout title={t('auth.resetTitle')} subtitle={t('errors.INVALID_RESET_TOKEN')}>
-        <p className="text-center font-body-md text-on-primary-container">
-          <Link to={ROUTES.FORGOT_PASSWORD} className="text-secondary-fixed-dim font-bold hover:underline">
+        <p className="text-center font-body-md text-[#A0A0A0]">
+          <Link to={ROUTES.FORGOT_PASSWORD} className="text-[#CCFF00] font-bold hover:underline">
             {t('auth.forgotPassword')}
           </Link>
         </p>
