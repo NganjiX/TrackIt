@@ -1,0 +1,452 @@
+// SmartLedger — PostgreSQL Schema (Prisma)
+// SRS Section 5 + auth/support tables
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  admin
+  user
+}
+
+enum BusinessType {
+  retail_shop
+  farm
+  service
+  manufacturer
+  cooperative
+  other
+}
+
+enum CreditReadiness {
+  low
+  medium
+  high
+}
+
+enum TransactionType {
+  sale
+  expense
+  purchase
+}
+
+enum PaymentStatus {
+  paid
+  pending
+  partial
+}
+
+enum DebtType {
+  receivable
+  payable
+}
+
+enum DebtStatus {
+  pending
+  partial
+  paid
+  overdue
+}
+
+enum DocumentCategory {
+  receipt
+  invoice
+  bill
+  contract
+  payment_proof
+  other
+}
+
+enum NotificationType {
+  alert
+  reminder
+  suggestion
+  info
+}
+
+enum AuthProvider {
+  local
+  google
+}
+
+// ─── User & Auth ─────────────────────────────────────────────────────────────
+
+model User {
+  id            String       @id @default(uuid()) @db.Uuid
+  email         String       @unique
+  passwordHash  String?      @map("password_hash")
+  fullName      String       @map("full_name")
+  role          UserRole     @default(user)
+  authProvider  AuthProvider @default(local) @map("auth_provider")
+  googleId      String?      @unique @map("google_id")
+  emailVerified Boolean      @default(false) @map("email_verified")
+  language      String       @default("en") @db.VarChar(5)
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+
+  business         Business?
+  refreshTokens    RefreshToken[]
+  otpVerifications OtpVerification[]
+  passwordResets   PasswordResetToken[]
+  notifications    Notification[]
+  aiChatSessions   AiChatSession[]
+  createdRecords   Transaction[]       @relation("CreatedBy")
+  createdCustomers Customer[]          @relation("CreatedBy")
+  createdSuppliers Supplier[]          @relation("CreatedBy")
+  createdDebts     Debt[]              @relation("CreatedBy")
+  createdDocuments Document[]          @relation("CreatedBy")
+  createdProducts  Product[]           @relation("CreatedBy")
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  tokenHash String   @map("token_hash")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  revoked   Boolean  @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tokenHash])
+  @@map("refresh_tokens")
+}
+
+model OtpVerification {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  code      String   @db.VarChar(6)
+  expiresAt DateTime @map("expires_at")
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, code])
+  @@map("otp_verifications")
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  tokenHash String   @map("token_hash")
+  expiresAt DateTime @map("expires_at")
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([tokenHash])
+  @@map("password_reset_tokens")
+}
+
+// ─── Business ────────────────────────────────────────────────────────────────
+
+model Business {
+  id                 String          @id @default(uuid()) @db.Uuid
+  ownerId            String          @unique @map("owner_id") @db.Uuid
+  passportId         String          @unique @map("passport_id") @db.VarChar(11)
+  name               String
+  type               BusinessType
+  industry           String
+  location           String
+  yearsOperating     Int             @map("years_operating")
+  numEmployees       Int             @map("num_employees")
+  goals              String          @db.Text
+  currency           String          @default("RWF") @db.VarChar(3)
+  healthScore        Int             @default(0) @map("health_score")
+  creditReadiness    CreditReadiness @default(low) @map("credit_readiness")
+  onboardingComplete Boolean         @default(false) @map("onboarding_complete")
+  deletedAt          DateTime?       @map("deleted_at")
+  createdAt          DateTime        @default(now()) @map("created_at")
+  updatedAt          DateTime        @updatedAt @map("updated_at")
+
+  owner            User              @relation(fields: [ownerId], references: [id], onDelete: Restrict)
+  transactions     Transaction[]
+  customers        Customer[]
+  suppliers        Supplier[]
+  debts            Debt[]
+  documents        Document[]
+  products         Product[]
+  notifications    Notification[]
+  passportShares   PassportShare[]
+  healthScoreLogs  HealthScoreLog[]
+
+  @@index([ownerId])
+  @@index([passportId])
+  @@index([deletedAt])
+  @@map("businesses")
+}
+
+// ─── Transaction ─────────────────────────────────────────────────────────────
+
+model Transaction {
+  id             String          @id @default(uuid()) @db.Uuid
+  businessId     String          @map("business_id") @db.Uuid
+  type           TransactionType
+  category       String
+  amount         Decimal         @db.Decimal(14, 2)
+  description    String          @db.Text
+  date           DateTime        @db.Date
+  customerId     String?         @map("customer_id") @db.Uuid
+  supplierId     String?         @map("supplier_id") @db.Uuid
+  paymentStatus  PaymentStatus   @map("payment_status")
+  productService String          @map("product_service")
+  receiptUrl     String?         @map("receipt_url")
+  createdById    String          @map("created_by_id") @db.Uuid
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+
+  business  Business  @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  customer  Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  supplier  Supplier? @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+  createdBy User      @relation("CreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+
+  @@index([businessId])
+  @@index([businessId, date])
+  @@index([businessId, type])
+  @@index([customerId])
+  @@index([supplierId])
+  @@map("transactions")
+}
+
+// ─── Customer ────────────────────────────────────────────────────────────────
+
+model Customer {
+  id             String   @id @default(uuid()) @db.Uuid
+  businessId     String   @map("business_id") @db.Uuid
+  name           String
+  phone          String
+  email          String?
+  address        String?
+  totalPurchases Decimal  @default(0) @map("total_purchases") @db.Decimal(14, 2)
+  debtBalance    Decimal  @default(0) @map("debt_balance") @db.Decimal(14, 2)
+  createdById    String   @map("created_by_id") @db.Uuid
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  business     Business      @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  createdBy    User          @relation("CreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+  transactions Transaction[]
+  debts        Debt[]        @relation("CustomerDebts")
+
+  @@index([businessId])
+  @@index([businessId, name])
+  @@map("customers")
+}
+
+// ─── Supplier ────────────────────────────────────────────────────────────────
+
+model Supplier {
+  id                 String   @id @default(uuid()) @db.Uuid
+  businessId         String   @map("business_id") @db.Uuid
+  name               String
+  phone              String
+  email              String?
+  address            String?
+  totalPayments      Decimal  @default(0) @map("total_payments") @db.Decimal(14, 2)
+  outstandingBalance Decimal  @default(0) @map("outstanding_balance") @db.Decimal(14, 2)
+  createdById        String   @map("created_by_id") @db.Uuid
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  business     Business      @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  createdBy    User          @relation("CreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+  transactions Transaction[]
+  debts        Debt[]        @relation("SupplierDebts")
+
+  @@index([businessId])
+  @@index([businessId, name])
+  @@map("suppliers")
+}
+
+// ─── Debt ────────────────────────────────────────────────────────────────────
+
+model Debt {
+  id          String     @id @default(uuid()) @db.Uuid
+  businessId  String     @map("business_id") @db.Uuid
+  type        DebtType
+  partyName   String     @map("party_name")
+  customerId  String?    @map("customer_id") @db.Uuid
+  supplierId  String?    @map("supplier_id") @db.Uuid
+  amount      Decimal    @db.Decimal(14, 2)
+  paidAmount  Decimal    @default(0) @map("paid_amount") @db.Decimal(14, 2)
+  dueDate     DateTime   @map("due_date") @db.Date
+  status      DebtStatus @default(pending)
+  description String     @db.Text
+  createdById String     @map("created_by_id") @db.Uuid
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  business  Business       @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  customer  Customer?      @relation("CustomerDebts", fields: [customerId], references: [id], onDelete: SetNull)
+  supplier  Supplier?      @relation("SupplierDebts", fields: [supplierId], references: [id], onDelete: SetNull)
+  createdBy User           @relation("CreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+  payments  DebtPayment[]
+
+  @@index([businessId])
+  @@index([businessId, type])
+  @@index([businessId, status])
+  @@index([businessId, dueDate])
+  @@map("debts")
+}
+
+model DebtPayment {
+  id        String   @id @default(uuid()) @db.Uuid
+  debtId    String   @map("debt_id") @db.Uuid
+  amount    Decimal  @db.Decimal(14, 2)
+  paidAt    DateTime @default(now()) @map("paid_at")
+  note      String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  debt Debt @relation(fields: [debtId], references: [id], onDelete: Cascade)
+
+  @@index([debtId])
+  @@map("debt_payments")
+}
+
+// ─── Document ────────────────────────────────────────────────────────────────
+
+model Document {
+  id          String           @id @default(uuid()) @db.Uuid
+  businessId  String           @map("business_id") @db.Uuid
+  name        String
+  category    DocumentCategory
+  fileUrl     String           @map("file_url")
+  fileKey     String           @map("file_key")
+  mimeType    String           @map("mime_type")
+  fileSize    Int              @map("file_size")
+  date        DateTime         @db.Date
+  amount      Decimal?         @db.Decimal(14, 2)
+  notes       String?          @db.Text
+  createdById String           @map("created_by_id") @db.Uuid
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+
+  business  Business @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  createdBy User     @relation("CreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+
+  @@index([businessId])
+  @@index([businessId, category])
+  @@map("documents")
+}
+
+// ─── Inventory (Product) ─────────────────────────────────────────────────────
+
+model Product {
+  id                String   @id @default(uuid()) @db.Uuid
+  businessId        String   @map("business_id") @db.Uuid
+  name              String
+  category          String
+  price             Decimal  @db.Decimal(14, 2)
+  cost              Decimal  @db.Decimal(14, 2)
+  stockQuantity     Int      @map("stock_quantity")
+  lowStockThreshold Int      @map("low_stock_threshold")
+  unit              String
+  createdById       String   @map("created_by_id") @db.Uuid
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  business  Business @relation(fields: [businessId], references: [id], onDelete: Restrict)
+  createdBy User     @relation("CreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+
+  @@index([businessId])
+  @@index([businessId, name])
+  @@map("products")
+}
+
+// ─── Notification ────────────────────────────────────────────────────────────
+
+model Notification {
+  id         String           @id @default(uuid()) @db.Uuid
+  businessId String           @map("business_id") @db.Uuid
+  userId     String           @map("user_id") @db.Uuid
+  title      String
+  message    String           @db.Text
+  type       NotificationType
+  read       Boolean          @default(false)
+  link       String?
+  createdAt  DateTime         @default(now()) @map("created_at")
+  updatedAt  DateTime         @updatedAt @map("updated_at")
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([businessId, userId, read])
+  @@map("notifications")
+}
+
+// ─── Passport Share ──────────────────────────────────────────────────────────
+
+model PassportShare {
+  id         String    @id @default(uuid()) @db.Uuid
+  businessId String    @map("business_id") @db.Uuid
+  token      String    @unique
+  expiresAt  DateTime? @map("expires_at")
+  revoked    Boolean   @default(false)
+  createdAt  DateTime  @default(now()) @map("created_at")
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([businessId])
+  @@map("passport_shares")
+}
+
+// ─── Health Score Audit ──────────────────────────────────────────────────────
+
+model HealthScoreLog {
+  id              String   @id @default(uuid()) @db.Uuid
+  businessId      String   @map("business_id") @db.Uuid
+  score           Int
+  recordsScore    Int      @map("records_score")
+  consistencyScore Int     @map("consistency_score")
+  debtScore       Int      @map("debt_score")
+  creditReadiness CreditReadiness @map("credit_readiness")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId, createdAt])
+  @@map("health_score_logs")
+}
+
+// ─── AI Assistant ────────────────────────────────────────────────────────────
+
+model AiChatSession {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages AiChatMessage[]
+
+  @@index([userId])
+  @@map("ai_chat_sessions")
+}
+
+model AiChatMessage {
+  id        String   @id @default(uuid()) @db.Uuid
+  sessionId String   @map("session_id") @db.Uuid
+  role      String   @db.VarChar(20)
+  content   String   @db.Text
+  language  String   @default("en") @db.VarChar(5)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  session AiChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@map("ai_chat_messages")
+}

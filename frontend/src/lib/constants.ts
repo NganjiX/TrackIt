@@ -1,0 +1,41 @@
+export const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1';
+
+export const ROUTES = {
+  LOGIN: '/login',
+  REGISTER: '/register',
+  FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password',
+  VERIFY_OTP: '/verify-otp',
+  GOOGLE_CALLBACK: '/auth/google/callback',
+  ONBOARDING: '/onboarding',
+  DASHBOARD: '/dashboard',
+  TRANSACTIONS: '/transactions',
+  CUSTOMERS: '/customers',
+  SUPPLIERS: '/suppliers',
+  DEBTS: '/debts',
+  DOCUMENTS: '/documents',
+  INVENTORY: '/inventory',
+  ANALYTICS: '/analytics',
+  HISTORY: '/history',
+  PASSPORT: '/passport',
+  ASSISTANT: '/assistant',
+  SETTINGS: '/settings',
+  PROFILE: '/profile',
+  ADMIN: '/admin',
+  PUBLIC_PASSPORT: '/passport/public/:token',
+} as const;
+
+export const NAV_ITEMS = [
+  { key: 'dashboard', path: ROUTES.DASHBOARD, icon: 'LayoutDashboard', materialIcon: 'dashboard' },
+  { key: 'transactions', path: ROUTES.TRANSACTIONS, icon: 'ArrowLeftRight', materialIcon: 'receipt_long' },
+  { key: 'customers', path: ROUTES.CUSTOMERS, icon: 'Users', materialIcon: 'groups' },
+  { key: 'suppliers', path: ROUTES.SUPPLIERS, icon: 'Truck', materialIcon: 'local_shipping' },
+  { key: 'debts', path: ROUTES.DEBTS, icon: 'Wallet', materialIcon: 'money_off' },
+  { key: 'documents', path: ROUTES.DOCUMENTS, icon: 'FileText', materialIcon: 'description' },
+  { key: 'inventory', path: ROUTES.INVENTORY, icon: 'Package', materialIcon: 'inventory_2' },
+  { key: 'analytics', path: ROUTES.ANALYTICS, icon: 'BarChart3', materialIcon: 'analytics' },
+  { key: 'history', path: ROUTES.HISTORY, icon: 'History', materialIcon: 'history' },
+  { key: 'passport', path: ROUTES.PASSPORT, icon: 'BadgeCheck', materialIcon: 'badge' },
+  { key: 'assistant', path: ROUTES.ASSISTANT, icon: 'Bot', materialIcon: 'smart_toy' },
+  { key: 'settings', path: ROUTES.SETTINGS, icon: 'Settings', materialIcon: 'settings' },
+] as const;
