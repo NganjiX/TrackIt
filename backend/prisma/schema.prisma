@@ -1,4 +1,4 @@
-// SmartLedger — PostgreSQL Schema (Prisma)
+// FinTrack — PostgreSQL Schema (Prisma)
 // SRS Section 5 + auth/support tables
 
 generator client {

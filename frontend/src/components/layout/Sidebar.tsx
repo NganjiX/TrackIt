@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 import { toast } from '@/hooks/useToast';
 
 /**
- * Fixed desktop sidebar — Stitch SmartLedger Fintech design (NAV-01).
+ * Fixed desktop sidebar — Stitch FinTrack fintech design (NAV-01).
  */
 export function Sidebar() {
   const { t } = useTranslation();

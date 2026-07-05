@@ -1,4 +1,4 @@
-# SmartLedger — Database Entity Relationship Diagram
+# FinTrack — Database Entity Relationship Diagram
 
 ## ER Diagram (Mermaid)
 

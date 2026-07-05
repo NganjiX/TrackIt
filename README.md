@@ -1,4 +1,4 @@
-# SmartLedger
+# FinTrack
 
 Digital Ledger, Business Health Tracker & Credit Readiness Platform for Rwandan MSMEs.
 
@@ -55,6 +55,6 @@ docker compose -f docker/docker-compose.yml up
 
 ## License
 
-Proprietary — SmartLedger © 2026
+Proprietary — FinTrack © 2026
 
 # TrackIt

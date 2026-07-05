@@ -1,7 +1,7 @@
 {
   "name": "smartledger-backend",
   "version": "1.0.0",
-  "description": "SmartLedger NestJS API",
+  "description": "FinTrack NestJS API",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

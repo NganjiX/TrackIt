@@ -25,7 +25,7 @@ function generatePassportId(): string {
  * Seeds development database with admin user, sample business, and reference data.
  */
 async function main(): Promise<void> {
-  console.log('Seeding SmartLedger database...');
+  console.log('Seeding FinTrack database...');
 
   const admin = await prisma.user.upsert({
     where: { email: 'admin@smartledger.rw' },

@@ -1,4 +1,4 @@
-# SmartLedger — API Architecture
+# FinTrack — API Architecture
 
 > Base URL: `/api/v1`  
 > Content-Type: `application/json`  

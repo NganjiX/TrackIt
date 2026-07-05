@@ -27,10 +27,10 @@ export class MailService {
     await this.transporter.sendMail({
       from,
       to,
-      subject: 'SmartLedger — Verify Your Email',
+      subject: 'FinTrack — Verify Your Email',
       html: `
         <div style="font-family: Inter, sans-serif; max-width: 480px; margin: 0 auto;">
-          <h2 style="color: #1A2642;">SmartLedger</h2>
+          <h2 style="color: #1A2642;">FinTrack</h2>
           <p>Hello ${fullName},</p>
           <p>Your verification code is:</p>
           <p style="font-size: 32px; font-weight: bold; color: #D4A017; letter-spacing: 8px;">${code}</p>
@@ -49,10 +49,10 @@ export class MailService {
     await this.transporter.sendMail({
       from,
       to,
-      subject: 'SmartLedger — Reset Your Password',
+      subject: 'FinTrack — Reset Your Password',
       html: `
         <div style="font-family: Inter, sans-serif; max-width: 480px; margin: 0 auto;">
-          <h2 style="color: #1A2642;">SmartLedger</h2>
+          <h2 style="color: #1A2642;">FinTrack</h2>
           <p>Hello ${fullName},</p>
           <p>Click the link below to reset your password. This link expires in 1 hour.</p>
           <a href="${resetUrl}" style="display: inline-block; background: #D4A017; color: #1A2642; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Reset Password</a>

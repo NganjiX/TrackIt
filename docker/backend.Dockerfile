@@ -1,4 +1,4 @@
-# Multi-stage build for SmartLedger NestJS API
+# Multi-stage build for FinTrack NestJS API
 
 FROM node:20-alpine AS builder
 

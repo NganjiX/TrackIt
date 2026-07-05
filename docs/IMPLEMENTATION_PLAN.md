@@ -1,13 +1,13 @@
-# SmartLedger — Phase 1 Implementation Plan
+# FinTrack — Phase 1 Implementation Plan
 
-> **Source of truth:** SmartLedger SRS v1.0 (July 2026)  
+> **Source of truth:** FinTrack SRS v1.0 (July 2026)  
 > **Architecture:** React 18 + Vite + NestJS 10 + PostgreSQL 16 + Prisma
 
 ---
 
 ## 1. Executive Summary
 
-SmartLedger is a bilingual (English / Kinyarwanda) fintech platform for Rwandan MSMEs. Release 1.0 delivers 14 use cases across 15 functional modules, a server-computed health score engine, Digital Business Passport with public share links, and an LLM-grounded AI Assistant.
+FinTrack is a bilingual (English / Kinyarwanda) fintech platform for Rwandan MSMEs. Release 1.0 delivers 14 use cases across 15 functional modules, a server-computed health score engine, Digital Business Passport with public share links, and an LLM-grounded AI Assistant.
 
 This plan breaks delivery into **12 phases**, each ending with an SRS traceability checklist.
 

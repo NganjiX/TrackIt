@@ -24,7 +24,7 @@ const config: Config = {
         'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
       },
       colors: {
-        // Stitch SmartLedger Fintech palette
+        // Stitch FinTrack fintech palette
         'on-tertiary-container': '#8c8e8f',
         'on-tertiary': '#ffffff',
         'inverse-on-surface': '#eaf1ff',

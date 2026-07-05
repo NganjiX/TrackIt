@@ -7,7 +7,7 @@ import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 
 /**
- * Bootstraps the SmartLedger NestJS API with security, validation, and Swagger.
+ * Bootstraps the FinTrack NestJS API with security, validation, and Swagger.
  */
 async function bootstrap(): Promise<void> {
   const logger = new Logger('Bootstrap');
@@ -41,7 +41,7 @@ async function bootstrap(): Promise<void> {
   );
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('SmartLedger API')
+    .setTitle('FinTrack API')
     .setDescription(
       'Digital Ledger, Business Health Tracker & Credit Readiness Platform for Rwandan MSMEs',
     )
@@ -63,7 +63,7 @@ async function bootstrap(): Promise<void> {
 
   await app.listen(port);
 
-  logger.log(`SmartLedger API running on http://localhost:${port}/${apiPrefix}`);
+  logger.log(`FinTrack API running on http://localhost:${port}/${apiPrefix}`);
   logger.log(`Swagger docs at http://localhost:${port}/api/docs`);
   logger.log(`Environment: ${nodeEnv}`);
 }

@@ -131,7 +131,7 @@ export class LlmService {
       if (lower.includes('inguzanyo') || lower.includes('loan') || lower.includes('kredit')) {
         return `Ubu ufite amanota ${context.healthScore}/100 (${context.creditReadinessLabel}). ${
           context.healthScore >= 70
-            ? "Urebye neza kandi ushobora gusaba inguzanyo n'inyandiko zawe za SmartLedger."
+            ? "Urebye neza kandi ushobora gusaba inguzanyo n'inyandiko zawe za FinTrack."
             : 'Ongera wandike ibicuruzwa, ohereza inyandiko, kandi wishyure amadeni kugira ngo utere imbere mu kwigira.'
         }`;
       }
@@ -175,6 +175,6 @@ export class LlmService {
       return `Here's a summary for ${context.businessName} (${context.passportId}):\n\n• Health Score: ${context.healthScore}/100 — ${context.creditReadinessLabel}\n• Revenue: ${context.totalRevenue.toLocaleString()} ${context.currency}\n• Expenses: ${context.totalExpenses.toLocaleString()} ${context.currency}\n• Net Profit: ${context.netProfit.toLocaleString()} ${context.currency}\n• Outstanding Debts: ${context.outstandingDebts.toLocaleString()} ${context.currency}\n• Activity: ${context.transactionCount} transactions, ${context.documentCount} documents, ${context.customerCount} customers`;
     }
 
-    return `I'm SmartLedger Assistant for ${context.businessName}. Your health score is ${context.healthScore}/100 (${context.creditReadinessLabel}) with ${context.netProfit.toLocaleString()} ${context.currency} net profit. Ask me about loan readiness, improving your score, debts, or your business summary. (Note: Configure ANTHROPIC_API_KEY or OPENAI_API_KEY for full AI responses.)`;
+    return `I'm FinTrack Assistant for ${context.businessName}. Your health score is ${context.healthScore}/100 (${context.creditReadinessLabel}) with ${context.netProfit.toLocaleString()} ${context.currency} net profit. Ask me about loan readiness, improving your score, debts, or your business summary. (Note: Configure ANTHROPIC_API_KEY or OPENAI_API_KEY for full AI responses.)`;
   }
 }

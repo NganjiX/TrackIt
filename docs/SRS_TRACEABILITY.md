@@ -1,4 +1,4 @@
-# SmartLedger — SRS Traceability Matrix
+# FinTrack — SRS Traceability Matrix
 
 > Maps every SRS requirement to implementation phase, backend module, frontend page, and API endpoint.
 

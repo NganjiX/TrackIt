@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "SmartLedger",
+    "name": "FinTrack",
     "tagline": "Premium Fintech Solutions for MSMEs",
     "taglineShort": "MSME Solutions",
     "footerTrust": "Built for institutional trust"
@@ -384,7 +384,7 @@
     "days": "days",
     "linkInvalid": "Link unavailable",
     "linkInvalidDesc": "This share link is invalid, expired, or has been revoked.",
-    "publicDisclaimer": "This is a read-only view shared by the business owner via SmartLedger.",
+    "publicDisclaimer": "This is a read-only view shared by the business owner via FinTrack.",
     "activity": {
       "transactions": "Transactions recorded",
       "documents": "Documents uploaded",
@@ -400,8 +400,8 @@
     }
   },
   "assistant": {
-    "welcome": "SmartLedger AI Assistant",
-    "welcomeDesc": "Ask questions about your business health, loan readiness, debts, and financial performance. Answers are grounded in your SmartLedger data.",
+    "welcome": "FinTrack AI Assistant",
+    "welcomeDesc": "Ask questions about your business health, loan readiness, debts, and financial performance. Answers are grounded in your FinTrack data.",
     "inputPlaceholder": "Ask about your business...",
     "thinking": "Thinking...",
     "starterPrompt": "Try asking:",

@@ -31,7 +31,7 @@ export function PublicPassportPage() {
             <div className="h-10 w-10 rounded-lg bg-gold flex items-center justify-center">
               <BadgeCheck className="h-6 w-6 text-navy" />
             </div>
-            <span className="font-display text-xl font-bold text-white">SmartLedger</span>
+            <span className="font-display text-xl font-bold text-white">FinTrack</span>
           </div>
           <LanguageToggle variant="auth" />
         </div>

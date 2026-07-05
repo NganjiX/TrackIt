@@ -1,4 +1,4 @@
-# SmartLedger — Folder Structure
+# FinTrack — Folder Structure
 
 ```
 smartledger/

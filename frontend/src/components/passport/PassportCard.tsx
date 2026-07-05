@@ -34,7 +34,7 @@ export function PassportCard({ passport, readonly }: PassportCardProps) {
               <BadgeCheck className="h-7 w-7 text-navy" />
             </div>
             <div>
-              <p className="text-xs text-navy-100 uppercase tracking-wider">SmartLedger</p>
+              <p className="text-xs text-navy-100 uppercase tracking-wider">FinTrack</p>
               <h2 className="font-display text-lg font-bold">{t('passport.title')}</h2>
             </div>
           </div>

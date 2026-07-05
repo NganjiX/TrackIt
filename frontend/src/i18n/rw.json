@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "SmartLedger",
+    "name": "FinTrack",
     "tagline": "Igisubizo cy'ubucuruzi n'inguzanyo ku MSME",
     "taglineShort": "Ibisubizo bya MSME",
     "footerTrust": "Byubatswe ku kwizera kw'ibigo"
@@ -384,7 +384,7 @@
     "days": "iminsi",
     "linkInvalid": "Link ntiboneka",
     "linkInvalidDesc": "Iyi link ntabwo ari yo, cyangwa yarangiye, cyangwa yahagaritswe.",
-    "publicDisclaimer": "Ibi ni ibyo gusa byasangijwe na nyir'ubucuruzi binyuze muri SmartLedger.",
+    "publicDisclaimer": "Ibi ni ibyo gusa byasangijwe na nyir'ubucuruzi binyuze muri FinTrack.",
     "activity": {
       "transactions": "Ibicuruzwa byanditswe",
       "documents": "Inyandiko zoherejwe",
@@ -400,8 +400,8 @@
     }
   },
   "assistant": {
-    "welcome": "Umujyanama wa SmartLedger AI",
-    "welcomeDesc": "Baza ibibazo ku buzima bw'ubucuruzi bwawe, kwitegura inguzanyo, amadeni, n'imikorere y'imari. Ibisubizo bishingira ku makuru yawe muri SmartLedger.",
+    "welcome": "Umujyanama wa FinTrack AI",
+    "welcomeDesc": "Baza ibibazo ku buzima bw'ubucuruzi bwawe, kwitegura inguzanyo, amadeni, n'imikorere y'imari. Ibisubizo bishingira ku makuru yawe muri FinTrack.",
     "inputPlaceholder": "Baza ku bucuruzi bwawe...",
     "thinking": "Ndatekereza...",
     "starterPrompt": "Gerageza kubaza:",
