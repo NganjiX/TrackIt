@@ -1,5 +1,6 @@
 import { API_BASE_URL } from '@/lib/constants';
 import type { ApiError, ApiResponse } from './types';
+import { getPresentationMockResponse, isPresentationModeToken } from './presentationMocks';
 
 type RequestOptions = RequestInit & { skipAuth?: boolean };
 
@@ -60,6 +61,7 @@ export async function apiClient<T>(
 ): Promise<T> {
   const { skipAuth, headers, ...rest } = options;
   const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
+  const method = (rest.method ?? 'GET').toUpperCase();
 
   const buildHeaders = (token: string | null): HeadersInit => ({
     'Content-Type': 'application/json',
@@ -67,24 +69,43 @@ export async function apiClient<T>(
     ...headers,
   });
 
-  let response = await fetch(url, {
-    ...rest,
-    credentials: 'include',
-    headers: buildHeaders(skipAuth ? null : accessToken),
-  });
+  const resolvePresentationFallback = (): T | null => {
+    if (skipAuth || !isPresentationModeToken(accessToken)) return null;
+    return getPresentationMockResponse<T>(endpoint, { ...rest, method });
+  };
 
-  if (response.status === 401 && !skipAuth) {
-    const newToken = await refreshAccessToken();
-    if (newToken) {
-      response = await fetch(url, {
-        ...rest,
-        credentials: 'include',
-        headers: buildHeaders(newToken),
-      });
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      ...rest,
+      credentials: 'include',
+      headers: buildHeaders(skipAuth ? null : accessToken),
+    });
+
+    if (response.status === 401 && !skipAuth) {
+      const newToken = await refreshAccessToken();
+      if (newToken) {
+        response = await fetch(url, {
+          ...rest,
+          credentials: 'include',
+          headers: buildHeaders(newToken),
+        });
+      }
     }
+  } catch {
+    const fallback = resolvePresentationFallback();
+    if (fallback !== null) return fallback;
+    throw {
+      statusCode: 503,
+      message: 'Network error',
+      errorCode: 'SERVICE_UNAVAILABLE',
+    } as ApiError;
   }
 
   if (!response.ok) {
+    const fallback = resolvePresentationFallback();
+    if (fallback !== null) return fallback;
+
     const error = (await response.json().catch(() => ({
       statusCode: response.status,
       message: response.statusText,
@@ -94,17 +115,29 @@ export async function apiClient<T>(
   }
 
   if (response.status === 204) {
+    const fallback = resolvePresentationFallback();
+    if (fallback !== null) return fallback;
     return undefined as T;
   }
 
-  const json = await response.json();
-  if (
-    typeof json === 'object' &&
-    json !== null &&
-    'data' in json &&
-    Object.keys(json as Record<string, unknown>).length === 1
-  ) {
-    return (json as { data: T }).data;
+  try {
+    const json = await response.json();
+    if (
+      typeof json === 'object' &&
+      json !== null &&
+      'data' in json &&
+      Object.keys(json as Record<string, unknown>).length === 1
+    ) {
+      return (json as { data: T }).data;
+    }
+    return json as T;
+  } catch {
+    const fallback = resolvePresentationFallback();
+    if (fallback !== null) return fallback;
+    throw {
+      statusCode: 500,
+      message: 'Invalid server response',
+      errorCode: 'UNKNOWN_ERROR',
+    } as ApiError;
   }
-  return json as T;
 }

@@ -1,4 +1,4 @@
-import { apiClient } from '@/lib/api/client';
+import { apiClient, getAccessToken } from '@/lib/api/client';
 import type { PaginatedResponse } from '@/lib/api/types';
 
 export type DocumentCategory =
@@ -63,6 +63,10 @@ export const documentsApi = {
     }),
 
   uploadFile: async (uploadUrl: string, file: File): Promise<void> => {
+    if (getAccessToken()?.startsWith('demo-')) {
+      // Presentation mode: skip real object storage upload.
+      return;
+    }
     const response = await fetch(uploadUrl, {
       method: 'PUT',
       body: file,
