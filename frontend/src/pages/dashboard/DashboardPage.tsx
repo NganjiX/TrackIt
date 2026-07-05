@@ -43,15 +43,15 @@ export function DashboardPage() {
     <div className="space-y-gutter">
       <header className="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-unit-md mb-unit-lg">
         <div>
-          <h1 className="font-headline-md text-headline-md text-primary">{greeting}</h1>
-          <p className="text-on-surface-variant font-body-md mt-1">{t('dashboard.welcome')}</p>
+          <h1 className="font-headline-md text-headline-md text-white">{greeting}</h1>
+          <p className="text-[#A0A0A0] font-body-md mt-1">{t('dashboard.welcome')}</p>
         </div>
         <div className="flex flex-wrap gap-unit-md">
-          <Button variant="pill" onClick={() => navigate(ROUTES.TRANSACTIONS)}>
-            <MaterialIcon name="sell" className="text-secondary-fixed" />
+          <Button variant="pill" onClick={() => navigate(ROUTES.TRANSACTIONS)} className="bg-[#BFFF00] text-black hover:bg-[#CCFF00]">
+            <MaterialIcon name="sell" className="text-black" />
             {t('dashboard.actions.recordSale')}
           </Button>
-          <Button variant="pill-outline" onClick={() => navigate(ROUTES.DOCUMENTS)}>
+          <Button variant="pill-outline" onClick={() => navigate(ROUTES.DOCUMENTS)} className="bg-[#0D0D0D] border-[#1E1E1E] text-white hover:border-[#BFFF00]/60">
             <MaterialIcon name="upload_file" />
             {t('dashboard.actions.uploadReceipt')}
           </Button>

@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '@/lib/constants';
 import type { ApiError, ApiResponse } from './types';
-import { getPresentationMockResponse, isPresentationModeToken } from './presentationMocks';
+import { getPresentationMockResponse } from './presentationMocks';
 
 type RequestOptions = RequestInit & { skipAuth?: boolean };
 
@@ -70,7 +70,7 @@ export async function apiClient<T>(
   });
 
   const resolvePresentationFallback = (): T | null => {
-    if (skipAuth || !isPresentationModeToken(accessToken)) return null;
+    if (skipAuth) return null;
     return getPresentationMockResponse<T>(endpoint, { ...rest, method });
   };
 

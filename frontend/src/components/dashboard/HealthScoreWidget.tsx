@@ -15,7 +15,7 @@ export function HealthScoreWidget({ breakdown, isLoading }: HealthScoreWidgetPro
   const { t } = useTranslation();
 
   if (isLoading) {
-    return <Skeleton className="h-72 rounded-2xl" />;
+    return <Skeleton className="h-72 rounded-2xl bg-[#111111]" />;
   }
 
   const overall = breakdown?.overall ?? 0;
@@ -28,13 +28,13 @@ export function HealthScoreWidget({ breakdown, isLoading }: HealthScoreWidgetPro
 
   return (
     <div className="glass-card p-unit-md rounded-2xl flex flex-col items-center justify-center text-center h-full min-h-[280px]">
-      <h4 className="font-label-sm text-on-surface-variant mb-4 uppercase">
+      <h4 className="font-label-sm text-[#A0A0A0] mb-4 uppercase tracking-wider">
         {t('dashboard.healthScore')}
       </h4>
       <div className="relative w-32 h-32 flex items-center justify-center">
         <svg className="w-full h-full" viewBox="0 0 100 100">
           <circle
-            className="text-surface-container"
+            className="text-[#111111]"
             cx="50"
             cy="50"
             fill="transparent"
@@ -43,7 +43,7 @@ export function HealthScoreWidget({ breakdown, isLoading }: HealthScoreWidgetPro
             strokeWidth="8"
           />
           <circle
-            className="text-secondary progress-ring__circle"
+            className="text-[#BFFF00] progress-ring__circle"
             cx="50"
             cy="50"
             fill="transparent"
@@ -56,13 +56,13 @@ export function HealthScoreWidget({ breakdown, isLoading }: HealthScoreWidgetPro
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="font-display-lg text-3xl text-primary">{overall}</span>
-          <span className="text-xs text-on-surface-variant">/100</span>
+          <span className="font-display-lg text-3xl text-white">{overall}</span>
+          <span className="text-xs text-[#A0A0A0]">/100</span>
         </div>
       </div>
       <p
         className={`mt-4 font-bold flex items-center gap-1 text-sm ${
-          status === 'good' ? 'text-green-600' : status === 'medium' ? 'text-secondary' : 'text-error'
+          status === 'good' ? 'text-[#BFFF00]' : status === 'medium' ? 'text-[#BFFF00]' : 'text-[#A0A0A0]'
         }`}
       >
         <MaterialIcon name={status === 'good' ? 'check_circle' : 'warning'} className="text-sm" />

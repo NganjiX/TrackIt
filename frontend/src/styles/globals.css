@@ -4,23 +4,23 @@
 
 @layer base {
   :root {
-    --background: 228 100% 98%;
-    --foreground: 213 62% 12%;
-    --card: 0 0% 100%;
-    --card-foreground: 213 62% 12%;
-    --primary: 220 84% 9%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 228 100% 95%;
-    --secondary-foreground: 213 62% 12%;
-    --muted: 228 100% 95%;
-    --muted-foreground: 240 3% 28%;
-    --accent: 43 100% 63%;
-    --accent-foreground: 43 100% 22%;
-    --destructive: 0 74% 42%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 240 6% 80%;
-    --input: 240 6% 80%;
-    --ring: 43 100% 63%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 75 100% 50%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 7%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 75 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 75 100% 50%;
+    --destructive-foreground: 0 0% 0%;
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 75 100% 50%;
     --radius: 0.5rem;
   }
 
@@ -29,7 +29,7 @@
   }
 
   body {
-    @apply bg-background text-on-surface font-body-md antialiased;
+    @apply bg-background text-foreground font-body-md antialiased;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 
@@ -53,29 +53,27 @@
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(13, 13, 13, 0.94);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 20px rgba(4, 17, 44, 0.08);
+    border: 1px solid rgba(30, 30, 30, 1);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
   }
 
   .glass-card-dark {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(17, 17, 17, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(30, 30, 30, 1);
   }
 
   .bg-mesh {
-    background-color: #04112c;
-    background-image:
-      radial-gradient(at 0% 0%, rgba(121, 89, 0, 0.15) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(121, 89, 0, 0.1) 0px, transparent 50%);
+    background-color: #000000;
+    background-image: radial-gradient(at 50% 0%, rgba(191, 255, 0, 0.1) 0px, transparent 55%);
   }
 
   .premium-shadow {
-    box-shadow: 0 10px 30px -10px rgba(4, 17, 44, 0.15);
+    box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.45);
   }
 
   .custom-scrollbar::-webkit-scrollbar {
@@ -87,7 +85,7 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #d9e2ff;
+    background: #1e1e1e;
     border-radius: 10px;
   }
 
@@ -98,11 +96,20 @@
   }
 
   .nav-item-active {
-    @apply bg-secondary-container text-on-secondary-container font-bold shadow-md;
+    background: #bfff00;
+    color: #000000;
+    font-weight: 700;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
   }
 
   .nav-item-idle {
-    @apply text-on-primary hover:bg-primary-fixed-dim/10 hover:text-secondary-fixed transition-all duration-200;
+    color: #ffffff;
+    transition: all 0.2s;
+  }
+
+  .nav-item-idle:hover {
+    background: #111111;
+    color: #ccff00;
   }
 }
 

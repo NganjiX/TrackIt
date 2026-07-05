@@ -12,7 +12,7 @@ export function AppLayout() {
   const { sidebarCollapsed } = useUiStore();
 
   return (
-    <div className="flex min-h-screen bg-background text-on-surface overflow-x-hidden">
+    <div className="flex min-h-screen bg-[#000000] text-white overflow-x-hidden">
       <Sidebar />
       <MobileNav />
 
@@ -25,7 +25,7 @@ export function AppLayout() {
         <MobileHeader />
         <DesktopTopBar compactSidebar={sidebarCollapsed} />
         <div className="flex-1 overflow-y-auto custom-scrollbar">
-          <main className="p-margin-mobile md:p-margin-desktop pt-unit-lg md:pt-unit-lg max-w-[1400px] w-full">
+          <main className="p-margin-mobile md:p-margin-desktop pt-unit-lg md:pt-unit-lg max-w-[1400px] w-full bg-[#000000]">
             <Outlet />
           </main>
         </div>

@@ -26,7 +26,7 @@ export function QuickActions({ actions }: QuickActionsProps) {
 
   return (
     <div className="glass-card p-unit-md rounded-2xl h-full">
-      <h4 className="font-label-sm text-on-surface-variant mb-4 uppercase">{t('dashboard.quickActions')}</h4>
+      <h4 className="font-label-sm text-[#A0A0A0] mb-4 uppercase tracking-wider">{t('dashboard.quickActions')}</h4>
       <div className="grid grid-cols-2 gap-2">
         {items.map((action) => {
           const config = ACTION_CONFIG[action];
@@ -36,10 +36,10 @@ export function QuickActions({ actions }: QuickActionsProps) {
               key={action}
               type="button"
               onClick={() => navigate(config.route)}
-              className="p-4 bg-white border border-outline-variant rounded-xl flex flex-col items-center gap-2 hover:bg-primary hover:text-on-primary transition-all group"
+              className="p-4 bg-[#111111] border border-[#1E1E1E] rounded-xl flex flex-col items-center gap-2 hover:border-[#BFFF00]/60 hover:text-[#BFFF00] transition-all group"
             >
-              <MaterialIcon name={config.icon} className="text-primary group-hover:text-secondary-fixed" />
-              <span className="text-xs font-bold text-center leading-tight">{t(config.labelKey)}</span>
+              <MaterialIcon name={config.icon} className="text-[#BFFF00] group-hover:text-[#CCFF00]" />
+              <span className="text-xs font-bold text-center leading-tight text-white">{t(config.labelKey)}</span>
             </button>
           );
         })}

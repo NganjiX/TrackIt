@@ -24,6 +24,7 @@ import { SettingsPage } from '@/pages/settings/SettingsPage';
 import { ProfilePage } from '@/pages/settings/ProfilePage';
 import { AdminPanelPage } from '@/pages/admin/AdminPanelPage';
 import { OnboardingPage } from '@/pages/onboarding/OnboardingPage';
+import { LandingPage } from '@/pages/landing/LandingPage';
 
 /**
  * Application route definitions with public, protected, and admin segments.
@@ -31,6 +32,7 @@ import { OnboardingPage } from '@/pages/onboarding/OnboardingPage';
 export function AppRouter() {
   return (
     <Routes>
+      <Route path={ROUTES.LANDING} element={<LandingPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.VERIFY_OTP} element={<OtpVerificationPage />} />
@@ -71,8 +73,7 @@ export function AppRouter() {
         <Route path={ROUTES.ADMIN} element={<AdminPanelPage />} />
       </Route>
 
-      <Route path="/" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
-      <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+      <Route path="*" element={<Navigate to={ROUTES.LANDING} replace />} />
     </Routes>
   );
 }

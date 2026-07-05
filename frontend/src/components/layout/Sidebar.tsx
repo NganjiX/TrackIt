@@ -33,19 +33,19 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'hidden md:flex flex-col fixed left-0 top-0 h-screen z-50 bg-primary shadow-xl transition-all duration-300',
+        'hidden md:flex flex-col fixed left-0 top-0 h-screen z-50 bg-[#000000] border-r border-[#1E1E1E] shadow-[0_12px_28px_rgba(0,0,0,0.4)] transition-all duration-300',
         sidebarCollapsed ? 'w-[72px] px-unit-xs' : 'w-64 px-unit-sm',
       )}
     >
       {/* Brand */}
       <div className={cn('flex items-center gap-3 px-3 py-unit-md mb-4', sidebarCollapsed && 'justify-center px-0')}>
-        <div className="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center shrink-0">
-          <MaterialIcon name="account_balance_wallet" className="text-on-secondary-container text-2xl" />
+        <div className="w-10 h-10 rounded-lg bg-[#111111] border border-[#1E1E1E] flex items-center justify-center shrink-0">
+          <MaterialIcon name="account_balance_wallet" className="text-[#BFFF00] text-2xl" />
         </div>
         {!sidebarCollapsed && (
           <div>
-            <h1 className="font-display text-lg text-secondary-fixed leading-tight">{t('app.name')}</h1>
-            <p className="font-label-sm text-[10px] text-on-primary/60 uppercase tracking-widest">
+            <h1 className="font-display text-lg text-white leading-tight">{t('app.name')}</h1>
+            <p className="font-label-sm text-[10px] text-[#A0A0A0] uppercase tracking-widest">
               {t('app.taglineShort')}
             </p>
           </div>
@@ -81,7 +81,7 @@ export function Sidebar() {
           <button
             type="button"
             onClick={() => navigate(ROUTES.TRANSACTIONS)}
-            className="w-full py-4 bg-secondary-fixed text-on-secondary-fixed font-bold rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95 hover:bg-secondary-fixed-dim"
+            className="w-full py-4 bg-[#BFFF00] text-black font-bold rounded-xl shadow-[0_12px_28px_rgba(0,0,0,0.4)] flex items-center justify-center gap-2 transition-all active:scale-95 hover:bg-[#CCFF00]"
           >
             <MaterialIcon name="add_circle" />
             <span>{t('dashboard.actions.recordSale')}</span>
@@ -93,7 +93,7 @@ export function Sidebar() {
           <button
             type="button"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-lg text-on-primary/70 hover:text-secondary-fixed hover:bg-primary-fixed-dim/10 transition-colors"
+            className="p-2 rounded-lg text-[#A0A0A0] hover:text-[#CCFF00] hover:bg-[#111111] transition-colors"
             aria-label={t('theme.toggle')}
           >
             {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -101,7 +101,7 @@ export function Sidebar() {
           <button
             type="button"
             onClick={handleLogout}
-            className="p-2 rounded-lg text-on-primary/70 hover:text-error hover:bg-error/10 transition-colors"
+            className="p-2 rounded-lg text-[#A0A0A0] hover:text-[#CCFF00] hover:bg-[#111111] transition-colors"
             aria-label={t('nav.logout')}
           >
             <LogOut className="h-4 w-4" />
@@ -109,7 +109,7 @@ export function Sidebar() {
         </div>
 
         {!sidebarCollapsed && user && (
-          <p className="px-3 text-xs text-on-primary-container truncate">{user.fullName}</p>
+          <p className="px-3 text-xs text-[#A0A0A0] truncate">{user.fullName}</p>
         )}
       </div>
     </aside>

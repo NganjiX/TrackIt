@@ -1,6 +1,7 @@
 export const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1';
 
 export const ROUTES = {
+  LANDING: '/',
   LOGIN: '/login',
   REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
