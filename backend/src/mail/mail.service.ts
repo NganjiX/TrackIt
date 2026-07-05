@@ -12,10 +12,14 @@ export class MailService {
   private transporter: Transporter;
 
   constructor(private readonly config: ConfigService) {
+    const user = this.config.get<string>('mail.user');
+    const pass = this.config.get<string>('mail.pass');
+
     this.transporter = nodemailer.createTransport({
       host: this.config.get<string>('mail.host'),
       port: this.config.get<number>('mail.port'),
-      secure: false,
+      secure: this.config.get<boolean>('mail.secure', false),
+      ...(user && pass ? { auth: { user, pass } } : {}),
     });
   }
 

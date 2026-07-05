@@ -69,7 +69,15 @@ export function OnboardingPage() {
   };
 
   const handleStep3 = (data: Pick<OnboardingForm, 'goals'>) => {
-    const payload = { ...draft, ...data } as OnboardingForm;
+    const payload: OnboardingForm = {
+      name: draft.name ?? '',
+      type: draft.type ?? 'other',
+      industry: draft.industry ?? '',
+      location: draft.location ?? '',
+      yearsOperating: draft.yearsOperating ?? 0,
+      numEmployees: draft.numEmployees ?? 1,
+      goals: data.goals,
+    };
     completeMutation.mutate(payload);
   };
 

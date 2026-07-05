@@ -98,5 +98,13 @@ export async function apiClient<T>(
   }
 
   const json = await response.json();
-  return (json.data !== undefined ? json.data : json) as T;
+  if (
+    typeof json === 'object' &&
+    json !== null &&
+    'data' in json &&
+    Object.keys(json as Record<string, unknown>).length === 1
+  ) {
+    return (json as { data: T }).data;
+  }
+  return json as T;
 }

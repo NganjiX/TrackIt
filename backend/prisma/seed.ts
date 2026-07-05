@@ -11,6 +11,7 @@ import {
   NotificationType,
 } from '@prisma/client';
 import { randomBytes } from 'crypto';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
@@ -26,13 +27,15 @@ function generatePassportId(): string {
  */
 async function main(): Promise<void> {
   console.log('Seeding FinTrack database...');
+  const seedPassword = 'Password123!';
+  const seedPasswordHash = await bcrypt.hash(seedPassword, 12);
 
   const admin = await prisma.user.upsert({
     where: { email: 'admin@smartledger.rw' },
-    update: {},
+    update: { passwordHash: seedPasswordHash, emailVerified: true },
     create: {
       email: 'admin@smartledger.rw',
-      passwordHash: '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oX.Q3Kj8Y5Ge',
+      passwordHash: seedPasswordHash,
       fullName: 'System Administrator',
       role: UserRole.admin,
       emailVerified: true,
@@ -42,10 +45,10 @@ async function main(): Promise<void> {
 
   const owner = await prisma.user.upsert({
     where: { email: 'owner@kigalifresh.rw' },
-    update: {},
+    update: { passwordHash: seedPasswordHash, emailVerified: true },
     create: {
       email: 'owner@kigalifresh.rw',
-      passwordHash: '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.G2oX.Q3Kj8Y5Ge',
+      passwordHash: seedPasswordHash,
       fullName: 'Jean Bizimungu',
       role: UserRole.user,
       emailVerified: true,

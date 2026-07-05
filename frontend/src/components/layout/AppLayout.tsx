@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { MobileNav, MobileHeader } from './MobileNav';
+import { DesktopTopBar } from './DesktopTopBar';
 import { useUiStore } from '@/store/ui.store';
 import { cn } from '@/lib/utils';
 
@@ -22,9 +23,12 @@ export function AppLayout() {
         )}
       >
         <MobileHeader />
-        <main className="flex-1 p-margin-mobile md:p-margin-desktop max-w-[1400px] w-full custom-scrollbar overflow-y-auto">
-          <Outlet />
-        </main>
+        <DesktopTopBar compactSidebar={sidebarCollapsed} />
+        <div className="flex-1 overflow-y-auto custom-scrollbar">
+          <main className="p-margin-mobile md:p-margin-desktop pt-unit-lg md:pt-unit-lg max-w-[1400px] w-full">
+            <Outlet />
+          </main>
+        </div>
       </div>
     </div>
   );

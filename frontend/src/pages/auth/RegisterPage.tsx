@@ -24,7 +24,16 @@ export function RegisterPage() {
 
   return (
     <AuthLayout title={t('auth.registerTitle')} subtitle={t('auth.registerSubtitle')}>
-      <form onSubmit={handleSubmit((d) => registerUser.mutate(d))} className="space-y-unit-md">
+      <form
+        onSubmit={handleSubmit((d) =>
+          registerUser.mutate({
+            fullName: d.fullName,
+            email: d.email,
+            password: d.password,
+          }),
+        )}
+        className="space-y-unit-md"
+      >
         <AuthFieldInput
           id="fullName"
           label={t('auth.fullName')}
