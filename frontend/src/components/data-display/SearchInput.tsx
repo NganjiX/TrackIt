@@ -28,13 +28,13 @@ export function SearchInput({ value, onChange, placeholder, className }: SearchI
     <div className={`relative flex-1 max-w-md ${className ?? ''}`}>
       <MaterialIcon
         name="search"
-        className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl pointer-events-none"
+        className="absolute left-3 top-1/2 -translate-y-1/2 text-[#A0A0A0] text-xl pointer-events-none"
       />
       <Input
         value={local}
         onChange={(e) => setLocal(e.target.value)}
         placeholder={placeholder ?? t('common.search')}
-        className="pl-10 bg-white/80 border-outline-variant/60 focus-visible:ring-secondary-fixed/30"
+        className="pl-10 bg-[#111111] border-[#1E1E1E] text-white placeholder:text-[#A0A0A0] focus-visible:ring-[#BFFF00]/20"
       />
     </div>
   );

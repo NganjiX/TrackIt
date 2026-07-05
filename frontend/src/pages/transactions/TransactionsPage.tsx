@@ -133,9 +133,9 @@ export function TransactionsPage() {
           <div className="col-span-12 xl:col-span-8">
             <ContentPanel
               noPadding
-              header={<span className="font-headline-md text-primary">{t('transactions.ledger')}</span>}
+              header={<span className="font-headline-md text-white">{t('transactions.ledger')}</span>}
             >
-              <div className="grid grid-cols-12 px-unit-md py-4 bg-primary/5 border-b border-outline-variant/20 text-[11px] uppercase tracking-wider text-on-surface-variant font-bold">
+              <div className="grid grid-cols-12 px-unit-md py-4 bg-[#111111] border-b border-[#1E1E1E] text-[11px] uppercase tracking-wider text-[#A0A0A0] font-bold">
                 <div className="col-span-2">{t('transactions.date')}</div>
                 <div className="col-span-3">{t('transactions.description')}</div>
                 <div className="col-span-2">{t('transactions.category')}</div>
@@ -143,36 +143,36 @@ export function TransactionsPage() {
                 <div className="col-span-2 text-right">{t('transactions.amount')}</div>
                 <div className="col-span-1 text-center">{t('transactions.paymentStatus')}</div>
               </div>
-              <div className="divide-y divide-outline-variant/20 custom-scrollbar">
+              <div className="divide-y divide-[#1E1E1E] custom-scrollbar">
                 {rows.map((txn) => {
                   const isOutflow = txn.type === 'expense' || txn.type === 'purchase';
                   const party = txn.customer?.name || txn.supplier?.name || '-';
                   const statusTone =
                     txn.paymentStatus === 'paid'
-                      ? 'bg-green-100 text-green-800 border-green-200'
+                      ? 'bg-[#111111] text-[#BFFF00] border-[#1E1E1E]'
                       : txn.paymentStatus === 'partial'
-                        ? 'bg-yellow-100 text-yellow-800 border-yellow-200'
-                        : 'bg-red-100 text-red-800 border-red-200';
+                        ? 'bg-[#111111] text-[#BFFF00] border-[#1E1E1E]'
+                        : 'bg-[#111111] text-[#A0A0A0] border-[#1E1E1E]';
 
                   return (
                     <div
                       key={txn.id}
-                      className="grid grid-cols-12 px-unit-md py-4 hover:bg-surface-container-low transition-colors items-center gap-2 group"
+                      className="grid grid-cols-12 px-unit-md py-4 hover:bg-[#111111] transition-colors items-center gap-2 group"
                     >
-                      <div className="col-span-2 text-sm text-on-surface">{formatDate(txn.date, i18n.language)}</div>
+                      <div className="col-span-2 text-sm text-[#A0A0A0]">{formatDate(txn.date, i18n.language)}</div>
                       <div className="col-span-3 min-w-0">
                         <div className="flex items-center gap-2">
-                          <MaterialIcon name={TYPE_ICONS[txn.type]} className="text-primary text-lg shrink-0" />
-                          <p className="font-semibold text-primary truncate">{txn.description}</p>
+                          <MaterialIcon name={TYPE_ICONS[txn.type]} className="text-[#BFFF00] text-lg shrink-0" />
+                          <p className="font-semibold text-white truncate">{txn.description}</p>
                         </div>
                       </div>
                       <div className="col-span-2">
-                        <span className="px-2 py-1 rounded-full bg-surface-container-high text-on-primary-container text-[11px] font-semibold">
+                        <span className="px-2 py-1 rounded-full bg-[#111111] border border-[#1E1E1E] text-[#A0A0A0] text-[11px] font-semibold">
                           {txn.category}
                         </span>
                       </div>
-                      <div className="col-span-2 text-sm text-on-surface-variant truncate">{party}</div>
-                      <div className={`col-span-2 text-right font-bold ${isOutflow ? 'text-error' : 'text-green-700'}`}>
+                      <div className="col-span-2 text-sm text-[#A0A0A0] truncate">{party}</div>
+                      <div className={`col-span-2 text-right font-bold ${isOutflow ? 'text-[#A0A0A0]' : 'text-[#BFFF00]'}`}>
                         {isOutflow ? '-' : '+'}
                         {formatRWF(txn.amount)}
                       </div>
@@ -186,7 +186,7 @@ export function TransactionsPage() {
                           disabled={deleteMutation.isPending}
                           aria-label={t('common.delete', { defaultValue: 'Delete' })}
                         >
-                          <MaterialIcon name="delete" className="text-error text-lg" />
+                          <MaterialIcon name="delete" className="text-[#A0A0A0] text-lg hover:text-[#CCFF00]" />
                         </button>
                       </div>
                     </div>
@@ -194,7 +194,7 @@ export function TransactionsPage() {
                 })}
               </div>
               {pagination && (
-                <div className="px-unit-md pb-unit-md pt-unit-sm border-t border-outline-variant">
+                <div className="px-unit-md pb-unit-md pt-unit-sm border-t border-[#1E1E1E]">
                   <Pagination page={pagination.page} totalPages={pagination.totalPages} onPageChange={setPage} />
                 </div>
               )}
@@ -204,35 +204,35 @@ export function TransactionsPage() {
           <aside className="col-span-12 xl:col-span-4 space-y-unit-md">
             <ContentPanel
               header={
-                <span className="font-headline-md text-primary">
+                <span className="font-headline-md text-white">
                   {t('transactions.monthlySummary', { defaultValue: 'Monthly Summary' })}
                 </span>
               }
             >
               <div className="space-y-3">
-                <div className="rounded-xl bg-green-50 border border-green-100 p-3">
-                  <p className="text-xs text-green-700">{t('transactions.totalSales', { defaultValue: 'Total Sales' })}</p>
-                  <p className="font-headline-md text-green-800">{formatRWF(monthly.sales)}</p>
+                <div className="rounded-xl bg-[#111111] border border-[#1E1E1E] p-3">
+                  <p className="text-xs text-[#A0A0A0]">{t('transactions.totalSales', { defaultValue: 'Total Sales' })}</p>
+                  <p className="font-headline-md text-[#BFFF00]">{formatRWF(monthly.sales)}</p>
                 </div>
-                <div className="rounded-xl bg-red-50 border border-red-100 p-3">
-                  <p className="text-xs text-red-700">{t('transactions.totalExpenses', { defaultValue: 'Total Expenses' })}</p>
-                  <p className="font-headline-md text-red-800">{formatRWF(monthly.expenses)}</p>
+                <div className="rounded-xl bg-[#111111] border border-[#1E1E1E] p-3">
+                  <p className="text-xs text-[#A0A0A0]">{t('transactions.totalExpenses', { defaultValue: 'Total Expenses' })}</p>
+                  <p className="font-headline-md text-[#A0A0A0]">{formatRWF(monthly.expenses)}</p>
                 </div>
-                <div className="rounded-xl bg-primary/5 border border-primary/10 p-3">
-                  <p className="text-xs text-primary">{t('transactions.netCashflow', { defaultValue: 'Net Cash Flow' })}</p>
-                  <p className="font-headline-md text-primary">{formatRWF(cashflow)}</p>
+                <div className="rounded-xl bg-[#111111] border border-[#1E1E1E] p-3">
+                  <p className="text-xs text-[#A0A0A0]">{t('transactions.netCashflow', { defaultValue: 'Net Cash Flow' })}</p>
+                  <p className="font-headline-md text-white">{formatRWF(cashflow)}</p>
                 </div>
               </div>
             </ContentPanel>
 
             <ContentPanel
               header={
-                <span className="font-headline-md text-primary">
+                <span className="font-headline-md text-white">
                   {t('transactions.quickInsights', { defaultValue: 'Quick Insights' })}
                 </span>
               }
             >
-              <p className="text-sm text-on-surface-variant leading-relaxed">
+              <p className="text-sm text-[#A0A0A0] leading-relaxed">
                 {rows.length === 0
                   ? t('transactions.noInsights', { defaultValue: 'Add transactions to unlock actionable insights.' })
                   : t('transactions.insightsHint', {
@@ -241,7 +241,7 @@ export function TransactionsPage() {
                       count: rows.length,
                     })}
               </p>
-              <Button variant="outline" className="w-full mt-4">
+              <Button variant="outline" className="w-full mt-4 border-[#1E1E1E] bg-[#111111] text-white hover:border-[#BFFF00]/50">
                 <MaterialIcon name="download" />
                 {t('transactions.export', { defaultValue: 'Export Report' })}
               </Button>

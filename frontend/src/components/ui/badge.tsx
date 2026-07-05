@@ -12,8 +12,8 @@ const badgeVariants = cva(
         destructive: 'border-transparent bg-error-container text-on-error-container',
         outline: 'border-outline-variant text-primary',
         gold: 'border-transparent bg-secondary-fixed/30 text-on-secondary-fixed-variant',
-        success: 'border-transparent bg-green-50 text-green-700',
-        warning: 'border-transparent bg-secondary-fixed/20 text-on-secondary-container',
+        success: 'border border-[#1E1E1E] bg-[#111111] text-[#BFFF00]',
+        warning: 'border border-[#1E1E1E] bg-[#111111] text-[#BFFF00]',
       },
     },
     defaultVariants: {

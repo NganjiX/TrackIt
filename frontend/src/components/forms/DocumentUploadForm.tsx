@@ -45,7 +45,7 @@ export function DocumentUploadForm({ onSubmit, onCancel, isSubmitting }: Documen
     },
   });
 
-  const selectClass = 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm';
+  const selectClass = 'flex h-10 w-full rounded-md border border-[#1E1E1E] bg-[#111111] px-3 py-2 text-sm text-white';
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0];
@@ -110,7 +110,7 @@ export function DocumentUploadForm({ onSubmit, onCancel, isSubmitting }: Documen
           <Label>{t('documents.category')}</Label>
           <select {...register('category')} className={selectClass}>
             {(['receipt', 'invoice', 'bill', 'contract', 'payment_proof', 'other'] as const).map((cat) => (
-              <option key={cat} value={cat}>{t(`documents.categories.${cat}`)}</option>
+              <option key={cat} value={cat} className="bg-[#111111] text-white">{t(`documents.categories.${cat}`)}</option>
             ))}
           </select>
         </div>

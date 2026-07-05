@@ -6,8 +6,8 @@ import { cn } from '@/lib/utils';
 const labelVariants = cva('font-label-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70', {
   variants: {
     variant: {
-      default: 'text-on-surface',
-      auth: 'text-secondary-fixed block',
+      default: 'text-[#A0A0A0]',
+      auth: 'text-[#A0A0A0] block',
     },
   },
   defaultVariants: {

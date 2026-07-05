@@ -55,13 +55,13 @@ export function SharePassportDialog({ open, onOpenChange }: SharePassportDialogP
           <div className="space-y-2">
             <Label>{t('passport.expiresIn')}</Label>
             <select
-              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              className="flex h-10 w-full rounded-md border border-[#1E1E1E] bg-[#111111] px-3 py-2 text-sm text-white"
               value={days}
               onChange={(e) => setDays(Number(e.target.value))}
             >
-              <option value={7}>7 {t('passport.days')}</option>
-              <option value={14}>14 {t('passport.days')}</option>
-              <option value={30}>30 {t('passport.days')}</option>
+              <option value={7} className="bg-[#111111] text-white">7 {t('passport.days')}</option>
+              <option value={14} className="bg-[#111111] text-white">14 {t('passport.days')}</option>
+              <option value={30} className="bg-[#111111] text-white">30 {t('passport.days')}</option>
             </select>
           </div>
 

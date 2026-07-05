@@ -44,10 +44,10 @@ export function StepBusinessInfo({ defaultValues, onNext }: StepBusinessInfoProp
         <select
           id="type"
           {...register('type')}
-          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+          className="flex h-10 w-full rounded-md border border-[#1E1E1E] bg-[#111111] px-3 py-2 text-sm text-white"
         >
           {BUSINESS_TYPES.map((type) => (
-            <option key={type} value={type}>
+            <option key={type} value={type} className="bg-[#111111] text-white">
               {t(`onboarding.types.${type}`)}
             </option>
           ))}

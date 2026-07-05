@@ -49,7 +49,7 @@ export function DebtForm({ defaultType = 'receivable', onSubmit, onCancel, isSub
   });
 
   const type = watch('type');
-  const selectClass = 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm';
+  const selectClass = 'flex h-10 w-full rounded-md border border-[#1E1E1E] bg-[#111111] px-3 py-2 text-sm text-white';
 
   const { data: customersData } = useQuery({
     queryKey: ['customers', 'all'],
@@ -85,8 +85,8 @@ export function DebtForm({ defaultType = 'receivable', onSubmit, onCancel, isSub
       <div className="space-y-2">
         <Label>{t('debts.type')}</Label>
         <select {...register('type')} className={selectClass}>
-          <option value="receivable">{t('debts.types.receivable')}</option>
-          <option value="payable">{t('debts.types.payable')}</option>
+          <option value="receivable" className="bg-[#111111] text-white">{t('debts.types.receivable')}</option>
+          <option value="payable" className="bg-[#111111] text-white">{t('debts.types.payable')}</option>
         </select>
       </div>
 
@@ -102,9 +102,9 @@ export function DebtForm({ defaultType = 'receivable', onSubmit, onCancel, isSub
               if (customer) setValue('partyName', customer.name);
             }}
           >
-            <option value="">{t('debts.noCustomer')}</option>
+            <option value="" className="bg-[#111111] text-white">{t('debts.noCustomer')}</option>
             {customersData?.data.map((c) => (
-              <option key={c.id} value={c.id}>{c.name}</option>
+              <option key={c.id} value={c.id} className="bg-[#111111] text-white">{c.name}</option>
             ))}
           </select>
         </div>
@@ -122,9 +122,9 @@ export function DebtForm({ defaultType = 'receivable', onSubmit, onCancel, isSub
               if (supplier) setValue('partyName', supplier.name);
             }}
           >
-            <option value="">{t('debts.noSupplier')}</option>
+            <option value="" className="bg-[#111111] text-white">{t('debts.noSupplier')}</option>
             {suppliersData?.data.map((s) => (
-              <option key={s.id} value={s.id}>{s.name}</option>
+              <option key={s.id} value={s.id} className="bg-[#111111] text-white">{s.name}</option>
             ))}
           </select>
         </div>

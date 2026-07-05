@@ -8,7 +8,7 @@ const inputVariants = cva(
     variants: {
       variant: {
         default:
-          'h-11 rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-on-surface placeholder:text-on-surface-variant focus-visible:outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-secondary-fixed/30',
+          'h-11 rounded-lg border border-[#1E1E1E] bg-[#111111] px-3 py-2 text-white placeholder:text-[#A0A0A0] focus-visible:outline-none focus-visible:border-[#BFFF00] focus-visible:ring-2 focus-visible:ring-[#BFFF00]/20',
         auth: 'h-12 rounded-xl border border-[#1E1E1E] bg-[#111111] px-10 py-unit-md text-white placeholder:text-[#A0A0A0]/60 focus-visible:outline-none focus-visible:border-[#BFFF00] focus-visible:ring-2 focus-visible:ring-[#BFFF00]/20',
       },
     },

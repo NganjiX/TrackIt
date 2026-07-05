@@ -64,7 +64,7 @@ export function TransactionForm({ defaultType = 'sale', onSubmit, onCancel, isSu
     enabled: type === 'purchase',
   });
 
-  const selectClass = 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm';
+  const selectClass = 'flex h-10 w-full rounded-md border border-[#1E1E1E] bg-[#111111] px-3 py-2 text-sm text-white';
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

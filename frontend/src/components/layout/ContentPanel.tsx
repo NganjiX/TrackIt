@@ -14,7 +14,7 @@ export function ContentPanel({ children, className, header, noPadding }: Content
   return (
     <div className={cn('glass-card rounded-2xl overflow-hidden', className)}>
       {header && (
-        <div className="px-unit-md py-unit-md border-b border-outline-variant bg-white/50 flex items-center justify-between gap-4">
+        <div className="px-unit-md py-unit-md border-b border-[#1E1E1E] bg-[#111111] flex items-center justify-between gap-4">
           {header}
         </div>
       )}
@@ -38,8 +38,8 @@ export function FilterChip({ active, onClick, children }: FilterChipProps) {
       className={cn(
         'px-4 py-2 rounded-full font-label-sm transition-all active:scale-[0.98]',
         active
-          ? 'bg-secondary-container text-on-secondary-container font-bold shadow-md'
-          : 'bg-white border border-outline-variant text-primary hover:bg-surface-container-low',
+          ? 'bg-[#BFFF00] text-black font-bold shadow-[0_10px_24px_rgba(0,0,0,0.4)]'
+          : 'bg-[#111111] border border-[#1E1E1E] text-[#A0A0A0] hover:text-[#CCFF00] hover:border-[#BFFF00]/50',
       )}
     >
       {children}

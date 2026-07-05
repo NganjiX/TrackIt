@@ -102,12 +102,12 @@ export function SettingsPage() {
                 <div className="space-y-2">
                   <Label>{t('onboarding.businessType')}</Label>
                   <select
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    className="flex h-10 w-full rounded-md border border-[#1E1E1E] bg-[#111111] px-3 py-2 text-sm text-white"
                     value={formValues.type}
                     onChange={(e) => setForm((f) => ({ ...f, type: e.target.value }))}
                   >
                     {BUSINESS_TYPES.map((type) => (
-                      <option key={type} value={type}>{t(`onboarding.types.${type}`)}</option>
+                      <option key={type} value={type} className="bg-[#111111] text-white">{t(`onboarding.types.${type}`)}</option>
                     ))}
                   </select>
                 </div>
