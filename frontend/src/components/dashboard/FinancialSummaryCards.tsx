@@ -82,20 +82,22 @@ export function FinancialSummaryCards({ financials, isLoading }: FinancialSummar
         return (
         <div
           key={key}
-          className={`glass-card p-unit-md rounded-2xl flex flex-col justify-between h-40 transition-all hover:-translate-y-1 cursor-default ${
+          className={`glass-card p-4 rounded-2xl flex flex-col justify-between h-36 transition-all hover:-translate-y-1 cursor-default ${
             highlight ? 'border-l-4 border-l-[#BFFF00]' : ''
           }`}
         >
-          <div className={`p-2 rounded-lg w-fit ${iconBg}`}>
-            <MaterialIcon name={icon} filled={filled} />
+          <div className={`p-1.5 rounded-lg w-fit ${iconBg}`}>
+            <MaterialIcon name={icon} filled={filled} className="text-lg" />
           </div>
-          <div>
-            <p className="text-[#A0A0A0] font-label-sm uppercase tracking-wider">{t(titleKey)}</p>
-            <h3 className="font-headline-md text-white text-xl md:text-2xl">
+          <div className="space-y-1">
+            <p className="text-[#A0A0A0] text-[11px] font-semibold uppercase tracking-[0.12em] leading-tight">
+              {t(titleKey)}
+            </p>
+            <h3 className="text-white text-[2rem] leading-none font-semibold">
               {formatRWF(values[key], currency)}
             </h3>
-            <p className="mt-1 text-xs font-semibold text-[#BFFF00] flex items-center gap-1">
-              <MaterialIcon name="trending_up" className="text-sm" />
+            <p className="pt-0.5 text-[12px] font-semibold text-[#BFFF00] flex items-center gap-1">
+              <MaterialIcon name="trending_up" className="text-xs" />
               {trend}
             </p>
           </div>

@@ -249,10 +249,10 @@ export function getPresentationMockResponse<T>(
   if (isGet(path, method, '/dashboard/summary')) {
     return {
       financials: {
-        totalRevenue: 1285000,
-        totalExpenses: 462000,
-        estimatedProfit: 823000,
-        outstandingDebts: 190000,
+        totalRevenue: 285000,
+        totalExpenses: 162000,
+        estimatedProfit: 123000,
+        outstandingDebts: 90000,
         currency: 'RWF',
       },
       creditReadiness: {
