@@ -1,0 +1,102 @@
+services:
+  - type: web
+    name: fintrack-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm ci && npm run build && npm run prisma:migrate:deploy
+    startCommand: npm run start:prod
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: API_PREFIX
+        value: api/v1
+      - key: DATABASE_URL
+        fromDatabase:
+          name: fintrack-db
+          property: connectionString
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: fintrack-redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          type: redis
+          name: fintrack-redis
+          property: port
+      - key: CORS_ORIGIN
+        value: https://fintrack-rw.vercel.app,https://fintrack-web.onrender.com
+      - key: FRONTEND_URL
+        value: https://fintrack-rw.vercel.app
+      - key: JWT_ACCESS_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: JWT_ACCESS_EXPIRES_IN
+        value: 15m
+      - key: JWT_REFRESH_EXPIRES_IN
+        value: 7d
+      - key: THROTTLE_TTL
+        value: 60000
+      - key: THROTTLE_LIMIT
+        value: 100
+      - key: S3_ENDPOINT
+        value: ""
+      - key: S3_REGION
+        value: us-east-1
+      - key: S3_BUCKET
+        value: smartledger
+      - key: S3_ACCESS_KEY
+        value: ""
+      - key: S3_SECRET_KEY
+        value: ""
+      - key: S3_PUBLIC_URL
+        value: ""
+      - key: MAIL_HOST
+        value: smtp.gmail.com
+      - key: MAIL_PORT
+        value: 465
+      - key: MAIL_SECURE
+        value: "true"
+      - key: MAIL_USER
+        value: ""
+      - key: MAIL_PASSWORD
+        value: ""
+      - key: MAIL_FROM
+        value: ""
+      - key: GOOGLE_CLIENT_ID
+        value: ""
+      - key: GOOGLE_CLIENT_SECRET
+        value: ""
+      - key: GOOGLE_CALLBACK_URL
+        value: https://fintrack-api.onrender.com/api/v1/auth/google/callback
+      - key: AI_PROVIDER
+        value: anthropic
+      - key: ANTHROPIC_API_KEY
+        value: ""
+      - key: OPENAI_API_KEY
+        value: ""
+
+  - type: redis
+    name: fintrack-redis
+    ipAllowList: []
+    plan: free
+    maxmemoryPolicy: noeviction
+
+  - type: web
+    name: fintrack-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    autoDeploy: true
+    envVars:
+      - key: VITE_API_URL
+        value: https://fintrack-api.onrender.com/api/v1
+
+databases:
+  - name: fintrack-db
+    plan: free
